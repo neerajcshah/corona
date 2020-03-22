@@ -8,7 +8,6 @@ export default class Leaflet extends React.Component {
     super(props);
   }
   render() {
-
     const position = [36.7, -119.4];
     const zoom = 5;
     return (
@@ -17,25 +16,38 @@ export default class Leaflet extends React.Component {
           url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
           attribution={'&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}
         />
-        {this.props.data.map((row, i) => {
-
-          if (row[this.props.date] <= 0) {
-            // No cases on this date
-            return;
-          }
-          if (row["Lat"] != null && row["Long"] != null) {
-            return (
-              <CircleMarker
-                key={i}
-                center={[row["Lat"], row["Long"]]}
-                radius={Math.sqrt(row[this.props.date])}
-                fillOpacity={0.5}
-                fillColor={"red"}
-                stroke={false}
-              />)
-          }
+        {this.props.infectedOn &&
+          <MyCircles data={this.props.infectedData} date={this.props.date} color="red"/>
         }
-        )}
+        {this.props.recoveredOn &&
+          <MyCircles data={this.props.recoveredData} date={this.props.date} color="green"/>
+        }
+        {this.props.deathOn &&
+          <MyCircles data={this.props.deathData} date={this.props.date} color="black"/>
+        }
       </Map>)
   }
+}
+
+const MyCircles = (props) => {
+  return (
+    props.data.map((row, i) => {
+      if (row[props.date] <= 0) {
+        // No cases on this date
+        return;
+      }
+      if (row["Lat"] != null && row["Long"] != null) {
+        return (
+          <CircleMarker
+            key={i}
+            center={[row["Lat"], row["Long"]]}
+            radius={Math.sqrt(row[props.date])}
+            fillOpacity={0.5}
+            fillColor={props.color}
+            stroke={false}
+          />)
+        }
+      }
+    )
+  );
 }
