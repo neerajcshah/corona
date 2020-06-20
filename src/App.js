@@ -110,7 +110,7 @@ class App extends React.Component {
             <Typography id="title" variant='caption'>
               This is a depiction of the spread of COVID-19 over time. We rely on the Johns Hopkins CSSE Data Repository, which is
               updated once a day at around 23:59 UTC. For that reason, the most recent data our slider allows users to select is
-              yesterday.
+              yesterday's.
             </Typography>
           </Grid>
         </Grid>
