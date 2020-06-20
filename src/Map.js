@@ -1,15 +1,16 @@
 import React from "react";
 import { withStyles } from '@material-ui/core/styles';
 
-import { Map, CircleMarker, TileLayer } from 'react-leaflet';
+import { Map, Circle, TileLayer } from 'react-leaflet';
+
 
 export default class Leaflet extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
-    const position = [36.7, -119.4];
-    const zoom = 5;
+    const position = [35, -40];
+    const zoom = 2;
     return (
       <Map center={position} zoom={zoom}>
         <TileLayer
@@ -38,10 +39,10 @@ const MyCircles = (props) => {
       }
       if (row["Lat"] != null && row["Long"] != null) {
         return (
-          <CircleMarker
+          <Circle
             key={i}
             center={[row["Lat"], row["Long"]]}
-            radius={Math.sqrt(row[props.date])}
+            radius={1000 * Math.sqrt(row[props.date])}
             fillOpacity={0.5}
             fillColor={props.color}
             stroke={false}

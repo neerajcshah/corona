@@ -4,6 +4,7 @@ import './App.css';
 import Papa from "papaparse";
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 import Leaflet from "./Map.js";
 import DateSlider from "./DateSlider.js";
@@ -32,7 +33,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    //const parsedUrl = App.pullUrl().then(result => Papa.parse(result, { header: true }));
     const parsedInfectedData = App.pullAndParseUrl(infectedUrl);
     const parsedRecoveredData = App.pullAndParseUrl(recoveredUrl);
     const parsedDeathData = App.pullAndParseUrl(deathUrl);
@@ -74,7 +74,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <Grid container justify="center"   alignItems="center" spacing={3}>
-          <Grid item xs={12}>
+          <Grid item xs={8}>
+            <Typography id="title" variant='h3'>
+              Visualizing COVID-19 Over Time
+            </Typography>
+          </Grid>
+          <Grid item xs={10}>
             <Leaflet
               infectedData={this.state.infectedData}
               infectedOn={this.state.infectedOn}
@@ -100,6 +105,13 @@ class App extends React.Component {
               toggleDeathData={this.toggleDeathData}
               deathOn={this.state.deathOn}
             />
+          </Grid>
+          <Grid item xs={8}>
+            <Typography id="title" variant='caption'>
+              This is a depiction of the spread of COVID-19 over time. We rely on the Johns Hopkins CSSE Data Repository, which is
+              updated once a day at around 23:59 UTC. For that reason, the most recent data our slider allows users to select is
+              yesterday.
+            </Typography>
           </Grid>
         </Grid>
       </div>

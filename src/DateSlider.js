@@ -42,8 +42,8 @@ export default class DateSlider extends React.Component {
     const date_today = new Date();
     // To calculate the time difference of two dates
     const difference_in_time = date_today.getTime() - date_of_first_case.getTime();
-    // To calculate the no. of days between two dates
-    const difference_in_days = Math.floor(difference_in_time / (1000 * 3600 * 24));
+    // To calculate the no. of days between two dates (subtract 1 since data is only updated at 23:59)
+    const difference_in_days = Math.floor(difference_in_time / (1000 * 3600 * 24)) - 1;
 
     const marks = [
       {
@@ -52,7 +52,7 @@ export default class DateSlider extends React.Component {
       },
       {
         value: difference_in_days,
-        label: "Today",
+        label: "Yesterday",
       },
     ];
     return (
