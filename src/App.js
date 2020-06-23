@@ -37,6 +37,8 @@ class App extends React.Component {
     const parsedRecoveredData = App.pullAndParseUrl(recoveredUrl);
     const parsedDeathData = App.pullAndParseUrl(deathUrl);
 
+    console.log(parsedInfectedData);
+
     parsedInfectedData.then(result => {
       this.setState({ infectedData: result.data });
     });
@@ -51,7 +53,7 @@ class App extends React.Component {
   }
 
   static pullAndParseUrl(url) {
-    return axios.get(url).then(response => { return response.data }).then(result => Papa.parse(result, { header: true }));
+    return axios.get(url).then(response => Papa.parse(response.data, { header: true }));
   }
 
 

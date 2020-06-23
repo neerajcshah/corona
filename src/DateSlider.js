@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
-// first date w/ data
+// First date w/ data CSSE dataset
 const date_of_first_case = new Date("01/22/2020");
 
 function formatDate(date) {
@@ -37,12 +37,15 @@ export default class DateSlider extends React.Component {
     result.setDate(result.getDate() + newValue);
     this.props.handleDateChange(formatDate(result));
   }
+
   render() {
 
     const date_today = new Date();
+
     // To calculate the time difference of two dates
     const difference_in_time = date_today.getTime() - date_of_first_case.getTime();
-    // To calculate the no. of days between two dates (subtract 1 since data is only updated at 23:59)
+
+    // To calculate the no. of days between two dates (subtract 1 since data is only updated at 23:59 UTC)
     const difference_in_days = Math.floor(difference_in_time / (1000 * 3600 * 24)) - 1;
 
     const marks = [
